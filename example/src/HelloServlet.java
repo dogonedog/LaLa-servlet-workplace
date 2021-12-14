@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/hello")//http://localhost:8080/example/HelloServlet @WebServlet("/HelloServlet")
 public class HelloServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;//同一のs－ブレットｄと照明するもの
+	private static final long serialVersionUID = 1L;//同一のサ－ブレットと証明するもの
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
