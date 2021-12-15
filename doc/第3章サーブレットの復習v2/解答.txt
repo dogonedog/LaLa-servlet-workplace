@@ -1,0 +1,31 @@
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/* 元からある
+@WebServlet("/maido")// index.htmlに指定されているURL
+public class MaidoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+*/
+/*元からある
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+*/
+		//コンテント記述
+		response.setContentType("text/html; Charset=UTF-8");
+		//書き出しメソッド
+		PrintWriter out = response.getWriter();
+		//html表記
+		out.println("<html><body>");
+		out.println("<h1>まいど</h1>");
+		out.println("</body></html>");
+	}
+
+}

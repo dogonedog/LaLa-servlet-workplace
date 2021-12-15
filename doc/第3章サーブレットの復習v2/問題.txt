@@ -1,0 +1,26 @@
+問題
+
+(1) 新規プロジェクトを作成する。
+  プロジェクト名: example
+
+(2) WebContent直下に index.html を置く。
+
+(3) src に servlet パッケージを作成する。
+
+(4) srvlet パッケージに サーブレット "MaidoServlet.java" を作成する。
+
+(5) index.html内のリンクをクリックすると、MaidoServletサーブレットの
+  doGet()メソッドで、以下の内容が出力されるようにする。
+
+  <html><body>
+  <h1>まいど</h1>
+  </body></html>
+
+  この内容は変更してもよい。
+
+(6) http://localhost:8080/example2/ にアクセスすることで、index.htmlが
+  表示される。
+  
+(6) http://localhost:8080/example2/maido にアクセスすることで、index.htmlが
+  表示される。
+

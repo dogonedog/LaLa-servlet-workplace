@@ -1,0 +1,24 @@
+プレアデスの中のTomcat
+C:\pleiades\tomcat\9\bin\start.bat
+
+
+Tomcat 自分専用のサーバーが必要
+bat windows専用　バッチファイル
+[main] org.apache.catalina.startup.Catalina.start
+起動している
+
+.catalina　Tomcatの別名
+
+http://localhost:8080/
+
+<role rolename="manager-gui"/>
+<user username="tomcat" password=tomcat" roles="manager-gui"/>
+
+
+C:\pleiades\tomcat\9\conf
+tomcat-users.xml 
+
+アプリケーションの配備　起動　trueになってたっらよい
+参照　indiunporker
+
+local:host:8080/indean-porker
