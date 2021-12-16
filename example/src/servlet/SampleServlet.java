@@ -16,7 +16,8 @@ public class SampleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 	//こっから教科書コード　運勢をランダムで決定
 	String[] luckArray = { "超スッキリ", "スッキリ", "最悪"};//超スッキリ0, スッキリ1, 最悪2
 	int index = (int) (Math.random() * 3);//0.999 Math.random() 0～0.999　×　3　でint 
@@ -36,7 +37,7 @@ public class SampleServlet extends HttpServlet {
 	out.println("<title>スッキリ占い</title>");
 	out.println("</head>");
 	out.println("<body>");
-	out.println("<p>" + today + "の運勢は｛" + luck + "」です</p>");
+	out.println("<p>" + today + "の運勢は「" + luck + "」です</p>");
 	out.println("</body>");
 	out.println("</html>");
 	}
