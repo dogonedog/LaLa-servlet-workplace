@@ -6,7 +6,7 @@
 <%@ page import="java.utill.Daet" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
-java
+javaを記述
 
 
 <!DOCTYPE html>
