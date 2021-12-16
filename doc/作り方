@@ -1,0 +1,116 @@
+●JSP
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> pageディレクティブ
+<%@ page import="ex.Employee" %>
+<%@ page import="java.utill.Daet" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
+javaを記述
+
+
+<!DOCTYPE html>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+
+
+jspファイルのURLの形式　：http://<サーバー名>/<アプリケーション（プロジェクト名）/〇〇.jsp>
+
+●フォーム
+リクエストすると同時にデータを送信
+
+<form action="/example/FormSampleServlet" method="get">　→　サーブレットクラス
+<form action="/example/formSample.jsp" method="get">　→　JSPファイル
+
+フォーム部分
+example/WebContent/formSample.jsp
+
+
+送信先のServlet内容
+example/src/servlet/FormSampleServlet.java
+
+package servlet;
+
+import java.io.IOException;
+
+@WebServlet("/FormSampleServlet")　→　action部分と合わせる
+
+
+/------------------------固定t-------------------------------------------------/
+
+public class FormSampleServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+/------------------------doGet-------------------------------------------------/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+
+	}
+
+
+/------------------------doPost-------------------------------------------------/
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+	}
+
+/------------------------　doPost doGetの中の処理　-------------------------------------------------/
+
+request.setCharacterEncoding("UTF-8");　　URLエンコードによって変換されたリクエストパラメータを戻す処理
+
+
+String name = request.getParameter("name");　　　　パラメータを取得
+String gender = request.getParameter("gender");
+
+
+＜パラメータチェック＞
+
+＜表示するメッセージ設定＞
+
+
+
+＜HTML出力＞
+response.setContentType("text/html; charset=UTF-8");
+PrintWriter out = response.getWriter();
+
+
+out.println("<!DOCTYPE html>");
+
+/------------------------　doPost doGetの中の処理　-------------------------------------------------/
+
+
+}
+
+
+●フォワード【処理がはやい】基本的に内部
+　ＵＲＬはリクエスト時そのまま
+
+/------------------------　doGetの中に書く　-------------------------------------------------/
+
+import javax.servlet.RequestDispatcher;
+
+
+
+※＜フォワードの構文(フォワードを行うサーブレットクラスに書く)＞
+RequestDispatcher dispatcher =
+request.getRequestDispatcher("フォワード先");　例）/WEB-INF/jsp/forwardSample.jsp
+dispatcher.forward(request, response);
+
+
+
+
+●リダイレクト　【転送元と転送先のアプリケーションが別】基本的に外部
+　ＵＲＬはリダイレクト先　表示ページとＵＲＬを同じにしたい時はリダイレクト
+
+ブラウザのリクエスト先を変更して処理の転送
+servletはただリダイレクトのみ行う
+
+
+/------------------------　doGetの中に書く　-------------------------------------------------/
+※＜リダイレクトの構文＞
+response.sendRedirect("リダイレクト先のＵＲＬ");　　
+
+
+<リダイレクト先が同じサーバである例（サーブレットクラス）>
+response.sendRedirect("/example/SampleServlet");　
