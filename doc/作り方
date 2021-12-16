@@ -13,6 +13,8 @@ java
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 
 
+jspファイルのURLの形式　：http://<サーバー名>/<アプリケーション（プロジェクト名）/〇〇.jsp>
+
 ●フォーム
 リクエストすると同時にデータを送信
 
