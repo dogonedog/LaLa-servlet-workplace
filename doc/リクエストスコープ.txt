@@ -1,0 +1,36 @@
+Servlet
+
+package servlet;
+
+import java.io.IOException;
+
+@WebServlet("/FormSampleServlet")
+
+public class FormSampleServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+  
+   String strawberry = 
+   Fruit f = new Fruit(); 
+	}
+	
+	　いれものを考える
+	
+	　〇Servlet
+		Game game = new Game(user, com, Msg);//作ったクラスをデータの運び役
+		request.setAttribute("game", game);
+		
+	　〇jspの上部に書く		
+		<%
+	Game game = (Game) request.getAttribute("game");//gameがなかったらｒnullが入ってる
+%>
+
+
+	<% if (game != null){ %>
+		<h2>結果</h2>
+		<p>user:<%= game.getUser() %></p>
+		<p>com:<%= game.getCom() %></p>
+		<p><%= game.getMsg() %></p>
+	<% } %>
