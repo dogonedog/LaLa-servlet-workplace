@@ -1,41 +1,42 @@
-œJSP
+â—JSP
 
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> pageƒfƒBƒŒƒNƒeƒBƒu
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> pageãƒ‡ã‚£ãƒ¬ã‚¯ãƒ†ã‚£ãƒ–
 <%@ page import="ex.Employee" %>
 <%@ page import="java.utill.Daet" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
-java‚ğ‹Lq
+javaã‚’è¨˜è¿°
 
 
 <!DOCTYPE html>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
 
 
-jspƒtƒ@ƒCƒ‹‚ÌURL‚ÌŒ`®@Fhttp://<ƒT[ƒo[–¼>/<ƒAƒvƒŠƒP[ƒVƒ‡ƒ“iƒvƒƒWƒFƒNƒg–¼j/ZZ.jsp>
+jspãƒ•ã‚¡ã‚¤ãƒ«ã®URLã®å½¢å¼ã€€ï¼šhttp://<ã‚µãƒ¼ãƒãƒ¼å>/<ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåï¼‰/ã€‡ã€‡.jsp>
+WebContentã¯ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®TOPã¨ã„ã†æ„å‘³
 
-œƒtƒH[ƒ€
-ƒŠƒNƒGƒXƒg‚·‚é‚Æ“¯‚Éƒf[ƒ^‚ğ‘—M
+â—ãƒ•ã‚©ãƒ¼ãƒ 
+ãƒªã‚¯ã‚¨ã‚¹ãƒˆã™ã‚‹ã¨åŒæ™‚ã«ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡
 
-<form action="/example/FormSampleServlet" method="get">@¨@ƒT[ƒuƒŒƒbƒgƒNƒ‰ƒX
-<form action="/example/formSample.jsp" method="get">@¨@JSPƒtƒ@ƒCƒ‹
+<form action="/example/FormSampleServlet" method="get">ã€€â†’ã€€ã‚µãƒ¼ãƒ–ãƒ¬ãƒƒãƒˆã‚¯ãƒ©ã‚¹
+<form action="/example/formSample.jsp" method="get">ã€€â†’ã€€JSPãƒ•ã‚¡ã‚¤ãƒ«
 
-ƒtƒH[ƒ€•”•ª
+ãƒ•ã‚©ãƒ¼ãƒ éƒ¨åˆ†
 example/WebContent/formSample.jsp
 
 
-‘—Mæ‚ÌServlet“à—e
+é€ä¿¡å…ˆã®Servletå†…å®¹
 example/src/servlet/FormSampleServlet.java
 
 package servlet;
 
 import java.io.IOException;
 
-@WebServlet("/FormSampleServlet")@¨@action•”•ª‚Æ‡‚í‚¹‚é
+@WebServlet("/FormSampleServlet")ã€€â†’ã€€actionéƒ¨åˆ†ã¨åˆã‚ã›ã‚‹
 
 
-/------------------------ŒÅ’èt-------------------------------------------------/
+/------------------------å›ºå®št-------------------------------------------------/
 
 public class FormSampleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,65 +56,72 @@ public class FormSampleServlet extends HttpServlet {
 
 	}
 
-/------------------------@doPost doGet‚Ì’†‚Ìˆ—@-------------------------------------------------/
+/------------------------ã€€doPost doGetã®ä¸­ã®å‡¦ç†ã€€-------------------------------------------------/
 
-request.setCharacterEncoding("UTF-8");@@URLƒGƒ“ƒR[ƒh‚É‚æ‚Á‚Ä•ÏŠ·‚³‚ê‚½ƒŠƒNƒGƒXƒgƒpƒ‰ƒ[ƒ^‚ğ–ß‚·ˆ—
+request.setCharacterEncoding("UTF-8");ã€€ã€€URLã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã«ã‚ˆã£ã¦å¤‰æ›ã•ã‚ŒãŸãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’æˆ»ã™å‡¦ç†
 
 
-String name = request.getParameter("name");@@@@ƒpƒ‰ƒ[ƒ^‚ğæ“¾
+String name = request.getParameter("name");ã€€ã€€ã€€ã€€ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å–å¾—
 String gender = request.getParameter("gender");
 
 
-ƒƒpƒ‰ƒ[ƒ^ƒ`ƒFƒbƒN„
+ï¼œãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒã‚§ãƒƒã‚¯ï¼
 
-ƒ•\¦‚·‚éƒƒbƒZ[ƒWİ’è„
+ï¼œè¡¨ç¤ºã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¨­å®šï¼
 
 
 
-ƒHTMLo—Í„
+ï¼œHTMLå‡ºåŠ›ï¼
 response.setContentType("text/html; charset=UTF-8");
 PrintWriter out = response.getWriter();
 
 
 out.println("<!DOCTYPE html>");
 
-/------------------------@doPost doGet‚Ì’†‚Ìˆ—@-------------------------------------------------/
+/------------------------ã€€doPost doGetã®ä¸­ã®å‡¦ç†ã€€-------------------------------------------------/
 
 
 }
 
 
-œƒtƒHƒ[ƒhyˆ—‚ª‚Í‚â‚¢zŠî–{“I‚É“à•”
-@‚t‚q‚k‚ÍƒŠƒNƒGƒXƒg‚»‚Ì‚Ü‚Ü
+â—ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ã€å‡¦ç†ãŒã¯ã‚„ã„ã€‘åŸºæœ¬çš„ã«å†…éƒ¨
+ã€€ï¼µï¼²ï¼¬ã¯ãƒªã‚¯ã‚¨ã‚¹ãƒˆæ™‚ãã®ã¾ã¾
 
-/------------------------@doGet‚Ì’†‚É‘‚­@-------------------------------------------------/
+/------------------------ã€€doGetã®ä¸­ã«æ›¸ãã€€-------------------------------------------------/
 
 import javax.servlet.RequestDispatcher;
 
 
 
-¦ƒƒtƒHƒ[ƒh‚Ì\•¶(ƒtƒHƒ[ƒh‚ğs‚¤ƒT[ƒuƒŒƒbƒgƒNƒ‰ƒX‚É‘‚­)„
+â€»ï¼œãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ã®æ§‹æ–‡(ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ã‚’è¡Œã†ã‚µãƒ¼ãƒ–ãƒ¬ãƒƒãƒˆã‚¯ãƒ©ã‚¹ã«æ›¸ã)ï¼
 RequestDispatcher dispatcher =
-request.getRequestDispatcher("ƒtƒHƒ[ƒhæ");@—áj/WEB-INF/jsp/forwardSample.jsp
+request.getRequestDispatcher("ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰å…ˆ");ã€€ä¾‹ï¼‰/WEB-INF/jsp/forwardSample.jsp
 dispatcher.forward(request, response);
 
-ƒtƒHƒ[ƒh‚ÌƒŠƒ“ƒN‚ÍƒvƒƒWƒFƒNƒg–¼‚¢‚ç‚È‚¢
+/------------------------ã€€å¤‰æ•°ã«ã„ã‚ŒãŸãƒãƒ¼ã‚¸ãƒ§ãƒ³
+String url = "/play.jsp";
+RequestDispatcher dispatcher =//dispatcherã®ç§»å‹•å…ˆã‚’è¨­å®š
+	request.getRequestDispatcher(url);//RequestDispatcherã¨ã„ã†ã‚¯ãƒ©ã‚¹
+dispatcher.forward(request, response);//ã“ã“ã§é·ç§»
+/------------------------ã€€
+
+ãƒ•ã‚©ãƒ¯ãƒ¼ãƒ‰ã®ãƒªãƒ³ã‚¯ã¯ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåã„ã‚‰ãªã„
 
 
-œƒŠƒ_ƒCƒŒƒNƒg@y“]‘—Œ³‚Æ“]‘—æ‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ª•ÊzŠî–{“I‚ÉŠO•”
-@‚t‚q‚k‚ÍƒŠƒ_ƒCƒŒƒNƒgæ@•\¦ƒy[ƒW‚Æ‚t‚q‚k‚ğ“¯‚¶‚É‚µ‚½‚¢‚ÍƒŠƒ_ƒCƒŒƒNƒg
+â—ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã€€ã€è»¢é€å…ƒã¨è»¢é€å…ˆã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãŒåˆ¥ã€‘åŸºæœ¬çš„ã«å¤–éƒ¨
+ã€€ï¼µï¼²ï¼¬ã¯ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆã€€è¡¨ç¤ºãƒšãƒ¼ã‚¸ã¨ï¼µï¼²ï¼¬ã‚’åŒã˜ã«ã—ãŸã„æ™‚ã¯ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
 
-ƒuƒ‰ƒEƒU‚ÌƒŠƒNƒGƒXƒgæ‚ğ•ÏX‚µ‚Äˆ—‚Ì“]‘—
-servlet‚Í‚½‚¾ƒŠƒ_ƒCƒŒƒNƒg‚Ì‚İs‚¤
-
-
-/------------------------@doGet‚Ì’†‚É‘‚­@-------------------------------------------------/
-¦ƒƒŠƒ_ƒCƒŒƒNƒg‚Ì\•¶„
-response.sendRedirect("ƒŠƒ_ƒCƒŒƒNƒgæ‚Ì‚t‚q‚k");@@
+ãƒ–ãƒ©ã‚¦ã‚¶ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆå…ˆã‚’å¤‰æ›´ã—ã¦å‡¦ç†ã®è»¢é€
+servletã¯ãŸã ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã®ã¿è¡Œã†
 
 
-<ƒŠƒ_ƒCƒŒƒNƒgæ‚ª“¯‚¶ƒT[ƒo‚Å‚ ‚é—áiƒT[ƒuƒŒƒbƒgƒNƒ‰ƒXj>
-response.sendRedirect("/exampleiƒvƒƒWƒFƒNƒg–¼j/SampleServlet");@
+/------------------------ã€€doGetã®ä¸­ã«æ›¸ãã€€-------------------------------------------------/
+â€»ï¼œãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã®æ§‹æ–‡ï¼
+response.sendRedirect("ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆã®ï¼µï¼²ï¼¬");ã€€ã€€
+
+
+<ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆãŒåŒã˜ã‚µãƒ¼ãƒã§ã‚ã‚‹ä¾‹ï¼ˆã‚µãƒ¼ãƒ–ãƒ¬ãƒƒãƒˆã‚¯ãƒ©ã‚¹ï¼‰>
+response.sendRedirect("/exampleï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåï¼‰/SampleServlet");ã€€
 c 2021 GitHub, Inc.
 Terms
 Privacy
