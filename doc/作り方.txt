@@ -128,3 +128,160 @@ Privacy
 Security
 Status
 Docs
+
+
+●リクエストスコープ
+
+＜サーブレットクラス＞
+
+　　上部に記入　import model.Game;
+
+　 1.フォワードする
+
+　 2.フォーム内容をうけとる
+
+　 3.javabeansにセットする
+
+		Game game = new Game(user, com, Msg);//インスタンスを作る
+		request.setAttribute("game", game);//("属性名",インスタンス名)
+
+　 4.フォワードする
+
+＜jsp＞
+
+<%@ page import="model.Game" %>
+<%
+	Game game = (Game) request.getAttribute("game");//gameがなかったらnullが入ってる　元の形にキャスト
+%>
+　　　　取得するインスタンスの型　変数名　＝　（取得するインスタンスの型）request.getAttribute("属性名");
+
+
+	<% if (game != null){ %>
+		<h2>結果</h2>
+		<p>user:<%= game.getUser() %></p>
+		<p>com:<%= game.getCom() %></p>
+		<p><%= game.getMsg() %></p>
+	<% } %>
+
+
+<javabeans>
+/------------------------　javabeans　-------------------------------------------------/
+package model;
+
+import java.io.Serializable;
+
+public class Game implements Serializable {
+	
+ private int user;
+ private int com;
+ private String Msg;
+ 
+ public Game() {}
+ public Game(int user, int com, String Msg) { //Gameのuserにセットしている
+	 this.user = user;
+	 this.com = com;
+	 this.Msg = Msg;
+ }
+ 
+public int getUser() {
+	return user;
+}
+public void setUser(int user) {
+	this.user = user;
+}
+public int getCom() {
+	return com;
+}
+public void setCom(int com) {
+	this.com = com;
+}
+public String getMsg() {
+	return Msg;
+}
+public void setMsg(String msg) {
+	Msg = msg;
+}
+ 
+	
+}
+
+/---------------------------------------------------------------------------------/
+
+
+
+
+
+●セッションスコープ
+
+＜jsp＞
+
+<%@ page import="model.Game" %>
+<%
+	Game game = (Game) session.getAttribute("game");//gameがなかったらnullが入ってる　元の形にキャスト
+%>
+
+
+
+<a href="/example/RegisterUser?action=done"></a>
+
+
+＜サーブレットクラス＞
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		String forwardPath = null;
+
+                String action = request.getParameter("action");
+
+                if(action == null){
+		forwardPath ="";
+		}
+
+		else if(action.equals("done")){
+
+		HttpSession session = request.getSession();//インスタンスの取得
+		User registerUser = (User) session.getAttrobute("registerUser");//セッションスコープからインスタンスの取得
+
+		//登録処理の呼び出し
+		RegisterUsetLogic logic = new RegisterUserLogic();
+		logic.excute(registerUser);
+
+		//不要となったセッションスコープ内のインスタンスを削除
+		session.removeAttribute("registerUser");
+
+		//登録後のフォワード先を設定
+		forwardPath = "";
+	}
+
+
+	//設定されたフォワード先にフォワード
+	RequestDispatcher dispatcher =
+		request.getRequestDispatcher(forwardPath);
+	dispatcher.forward(request, response);
+}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+
+	//登録するユーザー情報を設定
+	User registerUser = new User(id, name, pass);
+
+
+	//セッションスコープに登録ユーザーを保存
+		HttpSession session = request.getSession();//インスタンスの取得	
+		session.setAttribute("registerUser", registerUser);セッションスコープにインスタンスを保存
+
+
+	RequestDispatcher dispatcher =
+		request.getRequestDispatcher("");
+	dispatcher.forward(request, response);
+
+	}
+
+
+
+		}
+
+/---------------------------------------------------------------------------------/
+
