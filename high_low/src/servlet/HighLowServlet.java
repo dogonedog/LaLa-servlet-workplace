@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Game;
+import model.GameLogic;
 
 
 @WebServlet("/game")//("/judge")
@@ -20,7 +21,7 @@ public class HighLowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		String url = "/WEB-INF/jsp/play.jsp";
+		String url = "/WEB-INF/jsp/play.jsp";//play.jspにうつるだけ
 		RequestDispatcher dispatcher =
 				request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
@@ -35,21 +36,25 @@ public class HighLowServlet extends HttpServlet {
 		int user = Integer.parseInt(number);//Integerがクラス　parseInt(number)がメソッド
 		int com = new java.util.Random().nextInt(10);//(int) (Math.random() * 10);double型　static newしなくていい
         //int com = Integer.parseInt(request.getParameter("com"));
-		String Msg ="";
-		if (user > com) {
-			Msg = "大きすぎます";
-		} else if (user < com) {
-			Msg = "小さすぎます";
-		} else {
-			Msg = "正解です";
-		}
 		
-		System.out.println("user:" + user + "com:" + com + Msg);
+
+		String Msg= "";//コンストラクタにMsgがあるのでとりあえず空のメッセージをつくる
 		
+//		if (user > com) {
+//			Msg = "大きすぎます";
+//		} else if (user < com) {
+//			Msg = "小さすぎます";
+//		} else {
+//			Msg = "正解です";
+//		}
+				
+		Game game = new Game(user, com, Msg);//作ったクラスをデータの運び役　Msgは空
+	
+		GameLogic gamelogic = new GameLogic();// GameLogicに渡す　GameLogicは方法なのでスコープにセットしない
+		gamelogic.execute(game);//ここで新しいメッセージが入ったgameインスタンスになっている　ここで答えを出してからスコープにセットする
+		request.setAttribute("game", game);//リクエストスコープにセット
 		
-		Game game = new Game(user, com, Msg);//作ったクラスをデータの運び役
-		request.setAttribute("game", game);
-		
+		System.out.println("user:" + user + "com:" + com + Msg + game.getMsg());
 		
 //		Integer userNum = Integer.valueOf(user);
 //		Integer comNum = Integer.valueOf(com);

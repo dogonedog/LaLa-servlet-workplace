@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.Game" %>
 <%
-	Game game = (Game) request.getAttribute("game");//gameがなかったらｒnullが入ってる
+	Game game = (Game) request.getAttribute("game");//gameがなかったらｒnullが入ってる　最初null
 %>
 <%--Integer user = (Integer) request.getAttribute("userNum");
 	Integer com = (Integer) request.getAttribute("comNum");
@@ -29,7 +29,7 @@
 <input type="number" name="number">
 <input type="submit" value="送信">
 </form>
-
+<%--nullだから最初は以下の画面表示されない--%>
 	<% if (game != null){ %>
 		<h2>結果</h2>
 		<p>user:<%= game.getUser() %></p>

@@ -1,0 +1,77 @@
+High_Low ゲームをセッションに対応させる--その1
+
+大まかに言うと、
+
+現在リクエストスコープにセットした Gameビーンズ を セッションスコープに
+セットすることにする。
+
+ゲーム開始時に セッションスコープに Gameビーンズをセットすることにする。
+あるいは、ユーザーが最初に数を選択したときに セッションスコープに Gameビーンズをセットする。
+このどちらがいいか、考えてみる。
+
+ゲーム開始時にセッションスコープに Gameビーンズをセットするとして、考えてみる。
+となると、セットする Gameビーンズは だいたい以下のようになる。
+
+user: 0
+com: 1から99のランダム値(初回の正解値をここで決める)
+msg: ""(空文字)
+
+これをセッションスコープを通じて play.jsp に渡す。
+
+
+
+
+(1) http://localhost:8080/game とすると、以下の処理が行なわれる。
+
+  HighLowServlet.java の doGet() メソッド
+
+    i.   セッションを取得する。
+    ii.  以下の初期値で Gameクラスのインスタンスを作成する。
+         user = 0;
+         com = ランダム値(1...99の範囲)
+         msg = "";
+    iii. Gameクラスのインスタンスをセッションに保存する。
+         保存名は "game"。
+    iv.  "/WEB-INF/jsp/play.jsp にフォワードする。
+
+
+(2) play.jsp での処理
+
+  i.   セッションスコープから "game" を取得して Game型の変数 game に
+       代入する。
+  ii.  フォームにてユーザーに 1...99 の値を入力させる。
+  iii. フォームの送信先は HighLowServletサーブレットの doPostメソッドで
+       ある。
+  iv.  フォームの下には判定結果が表示されるが、最初は表示されないように
+       する。
+
+(3) HighLowServletサーブレットの doPost()メソッド
+
+  i.  play.jspから送られてきた user を受け取る。
+  ii. セッションに保存されている Gameビーンズ を取得し、setUser()メソッド
+      で user の値をセットする。
+  iii.GameLogicインスタンスの execute()メソッドに Gameビーンズを渡す。
+  iv. "/WEB-INF/jsp/play.jsp" にフォワード。
+
+(4) play.jspにて「別の数でやる」をクリックしたら。
+  i.  HighLowServletサーブレットの doGet()メソッドに replay=yes を送る。
+      つまり、
+        http://localhost:8080/high_low/game?replay=yes
+      と GET送信する。
+  ii. HighLowServletサーブレットの doGet()メソッドでは、
+      replay が "yes" なら、com の値を新しくして(ランダム値)、
+      セッションの Gameビーンズを更新する。
+  iii."/WEB-INF/jsp/play.jsp" にフォワード。
+
+(5) play.jspにて、ユーザーが「おわる」をクリックしたら、
+  i.  HighLowServlet の doGet()メソッドに replay=no を送る。
+        http://localhost:8080/high_low/game?replay=no
+  ii. HighLowServlet の doGet()メソッドでは以下の処理をする。
+        (a) セッションの廃棄。
+        (b) end.jsp へのフォワード。
+        (c) あるいは、play.jsp に 終了セクションを設けてそれを
+          表示する。
+
+
+
+;; 修正時刻: Sun Dec 19 18:55:28 2021
