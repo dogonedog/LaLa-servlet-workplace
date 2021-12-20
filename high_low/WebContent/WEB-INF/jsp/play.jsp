@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.Game" %>
 <%
-	Game game = (Game) request.getAttribute("game");//gameがなかったらｒnullが入ってる　最初null
+	Game game = (Game) session.getAttribute("game");//gameがなかったらｒnullが入ってる　最初null
 %>
 <%--Integer user = (Integer) request.getAttribute("userNum");
 	Integer com = (Integer) request.getAttribute("comNum");
@@ -38,7 +38,8 @@
 	<% } %>
 
 
-
+	<p><a href="/high_low/game?replay=yes">別の数でやる</a></p>
+	<p><a href="/high_low/game?replay=no">終わる</a></p>
 
 
 </body>

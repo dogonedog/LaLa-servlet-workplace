@@ -20,11 +20,37 @@ public class HighLowServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-		String url = "/WEB-INF/jsp/play.jsp";//play.jspにうつるだけ
+
+			HttpSession = request.getSeeeion();
+
+			Game game = new Game();
+				game.user = 0;
+				game.com = (int) (Math.random() * 100);
+				game.Msg ="";
+
+			session.setAttribute("game", game);
+
+			String forwardPath = null;
+			String replay = request.getParameter("replay");
+
+			if (replay == null){
+				forwardPath = "/WEB-INF/jsp/play.jsp";
+
+			} else if (replay.equals("yes")){
+				game.com = (int) (Math.random() * 100);
+
+				forwardPath = "/WEB-INF/jsp/play.jsp";
+
+			} else if (replay.equals("no")){
+				session.removeAttribute("game");
+
+				forwardPath = "/WEB-INF/jsp/end.jsp";
+			}
+
 		RequestDispatcher dispatcher =
-				request.getRequestDispatcher(url);
+				request.getRequestDispatcher(forwardPath);
 		dispatcher.forward(request, response);
+
 	}
 
 
@@ -34,11 +60,11 @@ public class HighLowServlet extends HttpServlet {
 			String number = request.getParameter("number");
 		
 		int user = Integer.parseInt(number);//Integerがクラス　parseInt(number)がメソッド
-		int com = new java.util.Random().nextInt(10);//(int) (Math.random() * 10);double型　static newしなくていい
+		//int com = new java.util.Random().nextInt(10);(int) (Math.random() * 10);double型　static newしなくていい
         //int com = Integer.parseInt(request.getParameter("com"));
 		
 
-		String Msg= "";//コンストラクタにMsgがあるのでとりあえず空のメッセージをつくる
+		//String Msg= "";//コンストラクタにMsgがあるのでとりあえず空のメッセージをつくる
 		
 //		if (user > com) {
 //			Msg = "大きすぎます";
@@ -47,15 +73,25 @@ public class HighLowServlet extends HttpServlet {
 //		} else {
 //			Msg = "正解です";
 //		}
-				
-		Game game = new Game(user, com, Msg);//作ったクラスをデータの運び役　Msgは空
+
+		Game game = (Game) session.getAttribute("game");
+		Game game = new Game(user, com, Msg);
+		game.setUser(user);
+		GameLogic gamelogic = new GameLogic();
+		gamelogic.execute(game);
+
+
+　　　　<%-- リクエストスコープ--%>
+		//Game game = new Game(user, com, Msg);//作ったクラスをデータの運び役　Msgは空
 	
-		GameLogic gamelogic = new GameLogic();// GameLogicに渡す　GameLogicは方法なのでスコープにセットしない
-		gamelogic.execute(game);//ここで新しいメッセージが入ったgameインスタンスになっている　ここで答えを出してからスコープにセットする
-		request.setAttribute("game", game);//リクエストスコープにセット
+		//GameLogic gamelogic = new GameLogic();// GameLogicに渡す　GameLogicは方法なのでスコープにセットしない
+		//gamelogic.execute(game);//ここで新しいメッセージが入ったgameインスタンスになっている　ここで答えを出してからスコープにセットする
+		//request.setAttribute("game", game);//リクエストスコープにセット
 		
-		System.out.println("user:" + user + "com:" + com + Msg + game.getMsg());
-		
+		//System.out.println("user:" + user + "com:" + com + Msg + game.getMsg());
+　　　　<%-- リクエストスコープ--%>
+
+
 //		Integer userNum = Integer.valueOf(user);
 //		Integer comNum = Integer.valueOf(com);
 //		request.setAttribute("userNum", userNum);
