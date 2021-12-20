@@ -13,7 +13,7 @@ import model.Game;
 import model.GameLogic;
 
 
-@WebServlet("/game")//("/judge")
+@WebServlet("/game")
 public class HighLowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class HighLowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
-			HttpSession = request.getSeeeion();
+			HttpSession session = request.getSeeeion();
 
 			Game game = new Game();
 				game.user = 0;
@@ -59,23 +59,11 @@ public class HighLowServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			String number = request.getParameter("number");
 		
-		int user = Integer.parseInt(number);//Integerがクラス　parseInt(number)がメソッド
-		//int com = new java.util.Random().nextInt(10);(int) (Math.random() * 10);double型　static newしなくていい
-        //int com = Integer.parseInt(request.getParameter("com"));
+		int user = Integer.parseInt(number);
 		
-
-		//String Msg= "";//コンストラクタにMsgがあるのでとりあえず空のメッセージをつくる
-		
-//		if (user > com) {
-//			Msg = "大きすぎます";
-//		} else if (user < com) {
-//			Msg = "小さすぎます";
-//		} else {
-//			Msg = "正解です";
-//		}
-
+		HttpSession session = request.getSeeeion();
 		Game game = (Game) session.getAttribute("game");
-		Game game = new Game(user, com, Msg);
+		//Game game = new Game(user, com, Msg);
 		game.setUser(user);
 		GameLogic gamelogic = new GameLogic();
 		gamelogic.execute(game);
@@ -91,41 +79,12 @@ public class HighLowServlet extends HttpServlet {
 		//System.out.println("user:" + user + "com:" + com + Msg + game.getMsg());
 　　　　<%-- リクエストスコープ--%>
 
-
-//		Integer userNum = Integer.valueOf(user);
-//		Integer comNum = Integer.valueOf(com);
-//		request.setAttribute("userNum", userNum);
-//		request.setAttribute("comNum", comNum);
-//		request.setAttribute("Msg", Msg);
 		
 		String url = "/WEB-INF/jsp/play.jsp";
 		RequestDispatcher dispatcher =//dispatcherの移動先を設定
 				request.getRequestDispatcher(url);//RequestDispatcherというクラス
 		dispatcher.forward(request, response);//ここで遷移
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//	response.setContentType("text/html; charset=UTF-8");
-//	PrintWriter out = response.getWriter();
-//	out.println("<DOCTYPE html>");
-//	out.println("<html>");
-//	out.println("<head>");
-//	out.println("<meta charset=\"UTF-8\">");
-//	out.println("<title></title>");
-//	out.println("</head>");
-//	out.println("<body>");
-//	out.println("<p>" + Msg + "</p>");	
-//	out.println("<a href=\"/high_low/play.jsp\">「もう一度する?」</a>");//プロジェクトの名前を指定する
-//	out.println("</body>");	
-//	out.println("</html>");
-	
+
 	}
 }
