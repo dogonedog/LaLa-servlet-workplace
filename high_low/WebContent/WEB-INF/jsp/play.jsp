@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="model.Game" %>
 <%
-	Game game = (Game) request.getAttribute("game");//gameがなかったらｒnullが入ってる　最初null
+	Game game = (Game) session.getAttribute("game");//gameがなかったらｒnullが入ってる　最初null
 %>
 <%--Integer user = (Integer) request.getAttribute("userNum");
 	Integer com = (Integer) request.getAttribute("comNum");
@@ -37,9 +37,9 @@
 		<p><%= game.getMsg() %></p>
 	<% } %>
 
-
-
-
-
+<a href="<%= request.getContextPath()%>/game?replay=yes">
+<button>別の数字でやる</button></a><%--dogetメソッドで取得できる --%>
+<a href="<%= request.getContextPath()%>/game?replay=end">
+<button>やめる</button></a>
 </body>
 </html>

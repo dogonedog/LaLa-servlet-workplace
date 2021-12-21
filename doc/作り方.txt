@@ -283,5 +283,58 @@ public void setMsg(String msg) {
 
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
 /---------------------------------------------------------------------------------/
 
+セッションスコープ
+
+
+//HttpSessionインスタンスの取得
+HttpSession session = request.getSession();
+
+//セッションスコープにインスタンスを保存
+session.setAttribute("human", human);
+
+//セッションスコープからインスタンスを取得
+Human h = (Human) session.getAttribute("human");
+
+//セッションスコープからインスタンスを削除
+session.removeAttribute("human");
+
+
+●jsp
+<%
+Human h = (Human) session.getAttribute("human");
+%>
+/---------------------------------------------------------------------------------/
+
+●アプリケーションスコープ
+
+
+//ServletContextインスタンスの取得
+ServletContext application = this.getServletContext();
+
+//アプリケーションスコープにインスタンスを保存
+application.stAttribute("human", human);
+
+//アプリケーションスコープからインスタンスを取得
+Human h = (Human) application.getAttribute("human");
+
+//アプリケーションスコープからインスタンスを削除
+application.removeAttribute("human");
+
+●jsp
+<%
+Human h = (Human) application.getAttribute("human");
+%>

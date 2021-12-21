@@ -1,4 +1,4 @@
-package servlet;
+	package servlet;
 
 import java.io.IOException;
 
@@ -8,23 +8,53 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Game;
 import model.GameLogic;
 
 
-@WebServlet("/game")//("/judge")
+@WebServlet("/game")
 public class HighLowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-		String url = "/WEB-INF/jsp/play.jsp";//play.jspにうつるだけ
-		RequestDispatcher dispatcher =
+
+			HttpSession session = request.getSession();	
+			String replay = request.getParameter("replay");
+			Game game =null;
+			String url =null;
+			if(replay == null) {//ゲーム始める時はnull
+				// Gameインスタンスを作成
+				int user = 0;
+				int com = (int) (Math.random() * 99) + 1;
+				String Msg ="";
+				game = new Game(user, com, Msg);
+				//sessionに保存
+				session.setAttribute("game", game);
+				url = "/WEB-INF/jsp/play.jsp";
+			}
+			
+			else if (replay.equals("yes")) {
+				//セッションからゲームインスタンスを取得する
+				game = (Game) session.getAttribute("game");
+				
+				//gameのcomの値を新しい値にする（ランダム）
+				int com = (int) (Math.random() * 99) + 1;
+				game.setCom(com);//sessionに入っている値がここで変わってる　参照をセットしているので大元が変わる
+				url = "/WEB-INF/jsp/play.jsp";
+			} else if (replay.equals("end")) {
+				session.invalidate();
+				url = "/WEB-INF/jsp/end.jsp";
+			}
+						 
+			
+//			
+			RequestDispatcher dispatcher =
 				request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
+			dispatcher.forward(request, response);
 	}
 
 
@@ -33,63 +63,23 @@ public class HighLowServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			String number = request.getParameter("number");
 		
-		int user = Integer.parseInt(number);//Integerがクラス　parseInt(number)がメソッド
-		int com = new java.util.Random().nextInt(10);//(int) (Math.random() * 10);double型　static newしなくていい
-        //int com = Integer.parseInt(request.getParameter("com"));
+			int user = Integer.parseInt(number);//Userの情報をセッションに渡す
 		
-
-		String Msg= "";//コンストラクタにMsgがあるのでとりあえず空のメッセージをつくる
-		
-//		if (user > com) {
-//			Msg = "大きすぎます";
-//		} else if (user < com) {
-//			Msg = "小さすぎます";
-//		} else {
-//			Msg = "正解です";
-//		}
+			HttpSession session = request.getSession();
+			Game game = (Game) session.getAttribute("game");
+			game.setUser(user);//セッションに保存されている Gameビーンズ を取得し、setUser()メソッドで user の値をセットする。;
 				
-		Game game = new Game(user, com, Msg);//作ったクラスをデータの運び役　Msgは空
-	
-		GameLogic gamelogic = new GameLogic();// GameLogicに渡す　GameLogicは方法なのでスコープにセットしない
-		gamelogic.execute(game);//ここで新しいメッセージが入ったgameインスタンスになっている　ここで答えを出してからスコープにセットする
-		request.setAttribute("game", game);//リクエストスコープにセット
+
+			GameLogic gamelogic = new GameLogic();// GameLogicに渡す　GameLogicは方法なのでスコープにセットしない
+			gamelogic.execute(game);//ここで新しいメッセージが入ったgameインスタンスになっている　ここで答えを出してからスコープにセットする
 		
-		System.out.println("user:" + user + "com:" + com + Msg + game.getMsg());
-		
-//		Integer userNum = Integer.valueOf(user);
-//		Integer comNum = Integer.valueOf(com);
-//		request.setAttribute("userNum", userNum);
-//		request.setAttribute("comNum", comNum);
-//		request.setAttribute("Msg", Msg);
-		
-		String url = "/WEB-INF/jsp/play.jsp";
-		RequestDispatcher dispatcher =//dispatcherの移動先を設定
-				request.getRequestDispatcher(url);//RequestDispatcherというクラス
-		dispatcher.forward(request, response);//ここで遷移
+			System.out.println("user:" + user + "com:" + game.getCom() + game.getMsg());
 
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//	response.setContentType("text/html; charset=UTF-8");
-//	PrintWriter out = response.getWriter();
-//	out.println("<DOCTYPE html>");
-//	out.println("<html>");
-//	out.println("<head>");
-//	out.println("<meta charset=\"UTF-8\">");
-//	out.println("<title></title>");
-//	out.println("</head>");
-//	out.println("<body>");
-//	out.println("<p>" + Msg + "</p>");	
-//	out.println("<a href=\"/high_low/play.jsp\">「もう一度する?」</a>");//プロジェクトの名前を指定する
-//	out.println("</body>");	
-//	out.println("</html>");
+			String url = "/WEB-INF/jsp/play.jsp";
+			RequestDispatcher dispatcher =//dispatcherの移動先を設定
+				request.getRequestDispatcher(url);//RequestDispatcherというクラス
+			dispatcher.forward(request, response);//ここで遷移
 	
 	}
 }
