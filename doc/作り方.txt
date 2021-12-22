@@ -338,3 +338,9 @@ application.removeAttribute("human");
 <%
 Human h = (Human) application.getAttribute("human");
 %>
+
+
+/---------------------------------------------------------------------------------/
+●URL
+<a href="<%= request.getContextPath() %>">トップへ</a>
+プロジェクトのTOPへのリンク
