@@ -344,3 +344,20 @@ Human h = (Human) application.getAttribute("human");
 ●URL
 <a href="<%= request.getContextPath() %>">トップへ</a>
 プロジェクトのTOPへのリンク
+
+
+
+/---------------------------------------------------------------------------------/
+●EL式
+
+
+
+【変数の値の出力】
+<c:out value="${human.name}" />
+
+【分岐文】
+
+
+●JSTL
+使うページの上に以下を挿入
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

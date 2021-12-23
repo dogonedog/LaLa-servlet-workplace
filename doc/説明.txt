@@ -22,3 +22,20 @@ tomcat-users.xml
 参照　indiunporker
 
 local:host:8080/indean-porker
+
+
+
+phpのpdoと一緒DAO
+
+
+		try (Connection conn = DriverManager.getConnection(
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try～with～resource文 ()エラーが起こった時自動的に閉じてくれる
+		
+		finally{
+		close
+		}

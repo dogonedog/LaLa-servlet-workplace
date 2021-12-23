@@ -19,14 +19,14 @@ public class CounterServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);//servletがもっている設定情報
-
-		Integer count = 0;
-		ServletContext application = config.getServletContext();
-		application.setAttribute("count",count);//インスタンス化された瞬間に実行される
-		
-		System.out.println("init()が実行されました");
+//
+//		Integer count = 0;
+//		ServletContext application = config.getServletContext();
+//		application.setAttribute("count",count);//インスタンス化された瞬間に実行される
+//		
+//		System.out.println("init()が実行されました");
 	}
-
+	//Listenerを作ったのでコメントアウト
 
 	public void destroy() {
 		System.out.println("destroy()が実行されました");

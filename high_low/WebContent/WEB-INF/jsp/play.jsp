@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%--
+//EL式挿入したのでコメントアウト
 <%@ page import="model.Game" %>
 <%
 	Game game = (Game) session.getAttribute("game");//gameがなかったらｒnullが入ってる　最初null
 %>
+--%>
+
+
+
 <%--Integer user = (Integer) request.getAttribute("userNum");
 	Integer com = (Integer) request.getAttribute("comNum");
 	String Msg = (String) request.getAttribute("Msg");
@@ -30,12 +39,21 @@
 <input type="submit" value="送信">
 </form>
 <%--nullだから最初は以下の画面表示されない--%>
+	<%--
 	<% if (game != null){ %>
 		<h2>結果</h2>
 		<p>user:<%= game.getUser() %></p>
 		<p>com:<%= game.getCom() %></p>
 		<p><%= game.getMsg() %></p>
 	<% } %>
+	--%>
+	
+	<c:if test="${game.user != 0}"><%--ゲームがnullでなければ--%>
+	<h2>結果</h2>
+	<p>user:　${game.user}</p>
+	<p>com:　${game.com}</p>
+	<p>${game.msg}</p>
+	</c:if>
 
 <a href="<%= request.getContextPath()%>/game?replay=yes">
 <button>別の数字でやる</button></a><%--dogetメソッドで取得できる --%>
