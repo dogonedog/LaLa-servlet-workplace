@@ -361,3 +361,15 @@ Human h = (Human) application.getAttribute("human");
 ●JSTL
 使うページの上に以下を挿入
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+カスタムタグダウンロード
+java maven jstl-api
+java maven jstl-impl
+
+WEB-INF libに２ファイルいれる
+右クリック　ビルドパス追加
+
+/---------------------------------------------------------------------------------/
+●データベース
+Connection
+PreparedStatement

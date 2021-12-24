@@ -18,7 +18,7 @@ http://localhost:8080/
 C:\pleiades\tomcat\9\conf
 tomcat-users.xml 
 
-アプリケーションの配備　起動　trueになってたっらよい
+アプリケーションの配備　起動　trueになってたらよい
 参照　indiunporker
 
 local:host:8080/indean-porker
@@ -39,3 +39,11 @@ phpのpdoと一緒DAO
 		finally{
 		close
 		}
+		
+		
+H2データベース		
+●　組み込みモード　ネットワークに繋がらない方法　embeded →データベース作成
+●　サーバーモード　ネットワークに繋がる方法　server →運用	
+		jdbc:h2:tcp://localhost/~/example
+		
+		
