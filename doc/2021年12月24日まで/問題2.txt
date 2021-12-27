@@ -1,0 +1,25 @@
+問題: MVCモデルに対応する (その2)
+
+(1) HighLowServlet 内の 数字の大小判定処理を
+  GameLogicクラスの execute()メソッドとする。p.203を参考にする。
+  GameLogic.java は modelパッケージとする。
+
+	String msg = "";
+	if (user > com) {
+		msg = "大きすぎます";
+	} else if (user < com) {
+		msg = "小さすぎます";
+	} else {
+		msg = "正解です";
+	}
+
+(2) その execute() メソッドは引数をひとつ持つ。
+  それは、Gameインスタンス(への参照)である。
+
+(3) その execute()メソッドで、Gameインスタンスの値を変える。
+  (参照を操作しているのであるから、)戻値は必要ない(void)。
+  
+
+
+
+;; 修正時刻: Sun Dec 19 13:36:28 2021

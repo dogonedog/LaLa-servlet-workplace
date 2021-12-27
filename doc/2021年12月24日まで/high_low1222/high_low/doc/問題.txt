@@ -1,0 +1,17 @@
+問題
+
+"HighLowServlet.java" の以下の処理を p.203の "HealthCheckLogic.java" を参考にして
+GameLogic.java の execute()メソッドとして実装しなさい。
+
+	String msg = "";
+	if (user > com) {
+		msg = "大きすぎます";
+	} else if (user < com) {
+		msg = "小さすぎます";
+	} else {
+		msg = "正解です";
+	}
+
+(1) GameLogic.java は、modelパッケージとする。
+(2) execute() メソッドは、引数に Gameインスタンスを受け取る。
+(3) execute() メソッドは、戻り値は void である。

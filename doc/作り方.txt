@@ -373,3 +373,28 @@ WEB-INF libに２ファイルいれる
 ●データベース
 Connection
 PreparedStatement
+
+
+
+/-----------------------------GetEmployeeListLogic--------------------------------------------/
+
+package model;
+
+import java.util.List;
+
+import dao.EmployeeDAO;
+
+public class GetEmployeeListLogic {
+	public List<Employee> execute() {
+		EmployeeDAO dao = new EmployeeDAO();　//daoを呼び出す
+		List<Employee> empList = dao.findAll();　//DBから取得してくる　findAll()に取得してくるメソッドが書かれている
+	return empList;
+	}
+}
+
+
+/-----------------------------リクエストスコープに保存--------------------------------------------/
+
+		GetEmployeeListLogic getEmployeeListLogic = new GetEmployeeListLogic();    //GetEmployeeListLogic を呼び出す
+		 List<Employee> empList = getEmployeeListLogic.execute();　 // daoにはデータベースに接続してリストを取得する関数が書いてある
+		 request.setAttribute("empList", empList);　 //リクエストスコープにリスト保存する
