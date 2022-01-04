@@ -7,10 +7,24 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 javaを記述
-
+<% Employee emp = new Employee("001", "湊　雄輔") %>
 
 <!DOCTYPE html>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+
+<html>
+<body>
+<% for(int i = 0; i < 10; i++){ %>
+<% if(i % 3 == 0){%>
+<p class="red">
+<% } else {%>
+<p> 
+<% }%>
+IDは<%= emp.getID() %>名前は<%= emp.getName() %></p>
+<% }%>
+
+</body>
+</html>
 
 
 jspファイルのURLの形式　：http://<サーバー名>/<アプリケーション（プロジェクト名）/〇〇.jsp>
