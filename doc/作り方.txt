@@ -399,10 +399,39 @@ application.removeAttribute("human");
     Human h = (Human) request.getAttribute("human");
     Human h = (Human) session.getAttribute("human");
     Human h = (Human) application.getAttribute("human");
+       例）List<Mutter> mutterList = (List<Mutter>) application.getAttribute("mutterList");
 
     //各スコープからインスタンスの削除
     session.removeAttribute("human");
     application.removeAttribute("human");
+
+/---------------------------------------------------------------------------------/
+
+//つぶやきリストをアプリケーションスコープから取得
+ServletContext application = this.getServletContext();
+List<Mutter> mutterList = (List<Mutter>) application.getAttribute("mutterList");
+
+//取得できなかった場合はつぶやきリストを新規作成してアプリケーションスコープに保存
+if(mutterList == null) {
+	mutterList = new ArrayList<>();
+	application.setAttribute("mutterList", mutterList);
+}
+
+HttpSession session =request.getession();
+User loginUser = (User) session.getAttribute("loginUser");
+
+
+＜PostMutterLogic＞
+public class PostmutterLogic {
+ public void execute(Mutter mutter, List<Mutter> mutterList){
+  mutterList.add(0, mutter);//先頭に追加
+ }
+}
+
+
+＜main.jsp＞
+<% for (Mutter mutter : mutterList) {%>
+<p><%= mutter.getUsername() %>:<%=mutter.getText() %></p>
 
 /---------------------------------------------------------------------------------/
 
@@ -424,10 +453,25 @@ Human h = (Human) application.getAttribute("human");
 
 
 
+<ArrayListの基本的な使い方>
+/---------------------------------------------------------------------------------/
+// ArrayListのインスタンスの生成
+List<String> nameList = new ArrayList<>();
+
+// Stringインスタンスを格納
+nameList.add("湊");　　// 0番目に格納
+nameList.add("綾部");　　// 1番目に格納
+nameList.add("菅原");　　// 2番目に格納
+
+// 格納したインスタンスを順に取得
+for(String name : namelist) {
+Sytem.out.println(name);
+}
 
 
+/---------------------------------------------------------------------------------/
 
-
+boolean isLogin = loginLogic.excute(user);
 /---------------------------------------------------------------------------------/
 ●EL式
 
