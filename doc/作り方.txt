@@ -3,8 +3,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> pageディレクティブ
 <%@ page import="ex.Employee" %>
-<%@ page import="java.utill.Daet" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="model.Game" %>
+<%
+	Game game = (Game) session.getAttribute("game");//gameがなかったらnullが入ってる　元の形にキャスト
+	Fruit fruit = (Fruit) request.getAttribute("fruit");
+%>
 
 javaを記述
 <% Employee emp = new Employee("001", "湊　雄輔") %>
@@ -29,6 +32,7 @@ IDは<%= emp.getID() %>名前は<%= emp.getName() %></p>
 
 jspファイルのURLの形式　：http://<サーバー名>/<アプリケーション（プロジェクト名）/〇〇.jsp>
 WebContentはプロジェクトのTOPという意味
+/------------------------------------------------------------------------------------------------
 
 ●フォーム
 リクエストすると同時にデータを送信
