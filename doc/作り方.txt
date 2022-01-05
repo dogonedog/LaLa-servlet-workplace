@@ -47,6 +47,11 @@ example/WebContent/formSample.jsp
 送信先のServlet内容
 example/src/servlet/FormSampleServlet.java
 
+パラメータを取得
+String name = request.getParameter("name");　　　　
+String gender = request.getParameter("gender");
+
+
 package servlet;
 
 import java.io.IOException;
@@ -183,8 +188,30 @@ Docs
 	<% } %>
 
 
+
+
+
+
+<Servlet>
+/------------------------　Servlet　--------------------------------------------/
+@weServlet("/MinatoIndex")
+/------------------------固定t-------------------------------------------------/
+
+public class FormSampleServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+/------------------------doGet-------------------------------------------------/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+request.setCharacterEncoding("UTF-8");
+	}
+	
+	
+	
 <javabeans>
-/------------------------　javabeans　-------------------------------------------------/
+/------------------------　javabeans　------implements Serializable--------------------------------------/
 package model;
 
 import java.io.Serializable;
