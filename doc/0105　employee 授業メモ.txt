@@ -1,0 +1,17 @@
+findByName List(string name) 戻り値は<Employee>
+
+メソッドの名前とSQL文を変える
+
+検索をうけもつためだけのサーブレット
+FindByNameServlet
+@("findByname")
+doPost()
+
+select id, name,age from employee where name like '%輔%';
+
+findByName(String name)────────────────────────↓
+string sql ="SELECT id, name, age from employee WHERE name like '%" + name + "%'";
+
+１）EmployeeDAOにfindByName（）メソッドを作る
+
+２）FindByNameLogicクラスをつくり　execute()メソッドをつくる

@@ -16,6 +16,7 @@ public class EmployeeDAO {
 	private final String DB_USER ="sa";
 	private final String DB_PASS ="";
 	//生の数字とかは定数の形で外に出して置いたほうがいい　
+		
 	
 	/**
 	 * 全従業員のリストを返してくれる
@@ -43,6 +44,39 @@ public class EmployeeDAO {
 			ResultSet rs = pStmt.executeQuery();//受け皿　SQLが実行　実行結果がrsにセット
 			//Employee employee; ここで宣言してはダメ　Employeeが上書きされる
 			while (rs.next()) {
+				String id = rs.getString("ID");
+				String name = rs.getString("NAME");
+				int age = rs.getInt("AGE");
+				
+				Employee employee = new Employee(id, name, age);
+				empList.add(employee);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;//エラーがおこった時emplistの中をnullにする
+		}
+		
+		
+		return empList;//empListをリターンする
+		
+	}
+	
+	public List<Employee> findByName(String word){//nameがかぶるのでwordに変更
+		List<Employee> empList = new ArrayList<>();//実態はArrayList　empListをリターンする
+		
+		try (Connection conn = DriverManager.getConnection(
+				JDBC_URL, DB_USER, DB_PASS)) {
+			
+			//String sql = "SELECT * FROM employee";大文字はデータベースの命令文　ユーザーの設定は小文字			
+//			String sql = "SELECT id, name, age from employee WHERE name like '%" + word + "%'";やっちゃダメ
+			String sql = "SELECT id, name, age from employee WHERE name like ?";
+			System.out.println(sql);
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "'%" + word + "%'");
+            ResultSet rs = pStmt.executeQuery();//受け皿　SQLが実行　実行結果がrsにセット
+			//Employee employee; ここで宣言してはダメ　Employeeが上書きされる
+			while (rs.next()) {//ここで一覧を作る
 				String id = rs.getString("ID");
 				String name = rs.getString("NAME");
 				int age = rs.getInt("AGE");
