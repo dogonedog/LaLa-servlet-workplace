@@ -232,6 +232,7 @@ public void setMsg(String msg) {
 <%@ page import="model.Game" %>
 <%
 	Game game = (Game) session.getAttribute("game");//gameがなかったらnullが入ってる　元の形にキャスト
+	Fruit fruit = (Fruit) request.getAttribute("fruit");
 %>
 
 
