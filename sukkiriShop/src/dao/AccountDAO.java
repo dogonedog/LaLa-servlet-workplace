@@ -17,12 +17,12 @@ public class AccountDAO {
 	public Account findByLogin(Login login) {
 		Account account = null;
 		
-		try (Connection conn = 
+		try(Connection conn = 
 				DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)){
 			
 			String sql = "SELECT user_id, pass, mail, name, age FROM account " +
-			"WHERE user_id = ? AND PASS = ?";
-			PreparedStatement pStmt = conn.prepareStatment(sql);
+			"WHERE user_id = ? AND pass = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserId());
 			pStmt.setString(2, login.getPass());
 			
@@ -30,14 +30,18 @@ public class AccountDAO {
 			
 			if(rs.next()) {
 				String userId = rs.getString("USER_ID");
-			}
-			
+				String pass = rs.getString("PASS");
+				String mail = rs.getString("MAIL");
+				String name = rs.getString("NAME");
+				int age = rs.getInt("AGE");
+				account = new Account(userId, pass, mail, name, age);
+				}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
-		return account;_
+		return account;
 	}
 }

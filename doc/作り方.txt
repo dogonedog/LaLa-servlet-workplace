@@ -3,8 +3,11 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> pageディレクティブ
 <%@ page import="ex.Employee" %>
-<%@ page import="java.utill.Daet" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="model.Game" %>
+<%
+	Game game = (Game) session.getAttribute("game");//gameがなかったらnullが入ってる　元の形にキャスト
+	Fruit fruit = (Fruit) request.getAttribute("fruit");
+%>
 
 javaを記述
 <% Employee emp = new Employee("001", "湊　雄輔") %>
@@ -29,6 +32,7 @@ IDは<%= emp.getID() %>名前は<%= emp.getName() %></p>
 
 jspファイルのURLの形式　：http://<サーバー名>/<アプリケーション（プロジェクト名）/〇〇.jsp>
 WebContentはプロジェクトのTOPという意味
+/------------------------------------------------------------------------------------------------
 
 ●フォーム
 リクエストすると同時にデータを送信
@@ -42,6 +46,11 @@ example/WebContent/formSample.jsp
 
 送信先のServlet内容
 example/src/servlet/FormSampleServlet.java
+
+パラメータを取得
+String name = request.getParameter("name");　　　　
+String gender = request.getParameter("gender");
+
 
 package servlet;
 
@@ -117,7 +126,8 @@ String url = "/play.jsp";
 RequestDispatcher dispatcher =//dispatcherの移動先を設定
 	request.getRequestDispatcher(url);//RequestDispatcherというクラス
 dispatcher.forward(request, response);//ここで遷移
-/------------------------　
+/------------------------
+
 
 フォワードのリンクはプロジェクト名いらない
 
@@ -178,8 +188,30 @@ Docs
 	<% } %>
 
 
+
+
+
+
+<Servlet>
+/------------------------　Servlet　--------------------------------------------/
+@weServlet("/MinatoIndex")
+/------------------------固定t-------------------------------------------------/
+
+public class FormSampleServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+/------------------------doGet-------------------------------------------------/
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+
+request.setCharacterEncoding("UTF-8");
+	}
+	
+	
+	
 <javabeans>
-/------------------------　javabeans　-------------------------------------------------/
+/------------------------　javabeans　------implements Serializable--------------------------------------/
 package model;
 
 import java.io.Serializable;
@@ -232,6 +264,7 @@ public void setMsg(String msg) {
 <%@ page import="model.Game" %>
 <%
 	Game game = (Game) session.getAttribute("game");//gameがなかったらnullが入ってる　元の形にキャスト
+	Fruit fruit = (Fruit) request.getAttribute("fruit");
 %>
 
 
@@ -348,10 +381,69 @@ Human h = (Human) application.getAttribute("human");
 //アプリケーションスコープからインスタンスを削除
 application.removeAttribute("human");
 
+/------------------　まとめ　---------------------------------------------------/
+
+    //HttpSesionインスタンスの取得
+     HttpSesion session = request.getSession();
+
+    //ServletContextインスタンスの取得
+     ServletContext application = this.getServletContext();
+
+
+    //各スコープにインスタンスを保存
+     request.setAttribute("fruit", f);
+     session.setAttribute("fruit", f);
+     application.setAttribute("fruit", f);
+
+    //各スコープからインスタンスの取得
+    Human h = (Human) request.getAttribute("human");
+    Human h = (Human) session.getAttribute("human");
+    Human h = (Human) application.getAttribute("human");
+       例）List<Mutter> mutterList = (List<Mutter>) application.getAttribute("mutterList");
+
+    //各スコープからインスタンスの削除
+    session.removeAttribute("human");
+    application.removeAttribute("human");
+
+/---------------------------------------------------------------------------------/
+
+//つぶやきリストをアプリケーションスコープから取得
+ServletContext application = this.getServletContext();
+List<Mutter> mutterList = (List<Mutter>) application.getAttribute("mutterList");
+
+//取得できなかった場合はつぶやきリストを新規作成してアプリケーションスコープに保存
+if(mutterList == null) {
+	mutterList = new ArrayList<>();
+	application.setAttribute("mutterList", mutterList);
+}
+
+HttpSession session =request.getession();
+User loginUser = (User) session.getAttribute("loginUser");
+
+
+＜PostMutterLogic＞
+public class PostmutterLogic {
+ public void execute(Mutter mutter, List<Mutter> mutterList){
+  mutterList.add(0, mutter);//先頭に追加
+ }
+}
+
+
+＜main.jsp＞
+<% for (Mutter mutter : mutterList) {%>
+<p><%= mutter.getUsername() %>:<%=mutter.getText() %></p>
+
+/---------------------------------------------------------------------------------/
+
+
 ●jsp
 <%
 Human h = (Human) application.getAttribute("human");
 %>
+
+
+
+
 
 
 /---------------------------------------------------------------------------------/
@@ -361,6 +453,25 @@ Human h = (Human) application.getAttribute("human");
 
 
 
+<ArrayListの基本的な使い方>
+/---------------------------------------------------------------------------------/
+// ArrayListのインスタンスの生成
+List<String> nameList = new ArrayList<>();
+
+// Stringインスタンスを格納
+nameList.add("湊");　　// 0番目に格納
+nameList.add("綾部");　　// 1番目に格納
+nameList.add("菅原");　　// 2番目に格納
+
+// 格納したインスタンスを順に取得
+for(String name : namelist) {
+Sytem.out.println(name);
+}
+
+
+/---------------------------------------------------------------------------------/
+
+boolean isLogin = loginLogic.excute(user);
 /---------------------------------------------------------------------------------/
 ●EL式
 

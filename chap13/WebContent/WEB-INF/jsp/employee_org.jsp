@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>社員管理アプリケーション</h1>
-<p><a href="<%=request.getContextPath() %>/CreateeConfirm"><button>新規社員登録</button></a></p>
+<p><a href="<%=request.getContextPath() %>/create"><button>新規社員登録</button></a></p>
 <div>
 	<form action="<%=request.getContextPath() %>>/findByName" method="post"><!-- action="/chap13/findByNme" -->
 	検索する語:<input type="text" name="name">
